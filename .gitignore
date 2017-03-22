@@ -1,0 +1,12 @@
+# config files
+config/config.toml
+
+# Dependency directories
+node_modules
+
+# eslint
+.eslintrc.json
+
+# misc files
+todo.txt
+tools.js

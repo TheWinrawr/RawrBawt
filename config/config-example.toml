@@ -1,0 +1,8 @@
+[discord]
+token = "" # bot token goes here
+
+[youtube]
+key = "" # youtube api key goesh ere
+
+[plugins]
+enabled = ["core", "music"]

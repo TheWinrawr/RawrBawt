@@ -2,7 +2,7 @@
 token = "" # bot token goes here
 
 [youtube]
-key = "" # youtube api key goesh ere
+key = "" # youtube api key goes ere
 
 [plugins]
 enabled = ["core", "music"]

@@ -6,8 +6,7 @@ const
 	_ = require("lodash"),
 	config = require("config");
 
-const ytKey = config.get("music.key");
-console.log("key: " + ytKey);
+const ytKey = config.get("youtube.key");
 
 let queue = [];
 let userLimit = 2;

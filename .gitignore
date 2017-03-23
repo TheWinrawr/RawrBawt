@@ -1,5 +1,6 @@
 # config files
-config/config.toml
+config/local.toml
+config/local.*
 
 # Dependency directories
 node_modules

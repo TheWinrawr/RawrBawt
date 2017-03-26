@@ -15,7 +15,7 @@ let currentSong = null;
 let voiceChannel = null;
 let dispatcher = null;
 
-let musicChannelName = "mufsic";
+let musicChannelName = "music";
 
 let commands = {
 	"music": {

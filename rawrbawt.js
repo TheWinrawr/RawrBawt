@@ -9,7 +9,15 @@ const
 const bot = new Discord.Client();
 const token = config.get("discord.token");
 
-let commands = {};
+let commands = {
+	"help": {
+		usage: "",
+		description: "Get a list of commands with descriptions",
+		run: (message, args) => {
+			return utils.printHelp(message, commands);
+		}
+	}
+};
 
 global.rootDir = path.resolve(__dirname);
 
@@ -36,13 +44,13 @@ bot.on("message", message => {
 
 	let command = commands[args[0]];
 	if (!command) {
-		return utils.sendMessage(message, "Sorry, I don't know that command!");
+		return utils.sendReply(message, "Sorry, I don't know that command!");
 	} else {
 		try {
 			return command.run(message, args);
 		} catch(e) {
 			console.log(e);
-			return utils.sendMessage(message, "Sorry, command failed!");
+			return utils.sendReply(message, "Sorry, command failed!");
 		}
 		
 	}

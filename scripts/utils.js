@@ -8,8 +8,22 @@ let utils = {};
  * @param  {String} content The string that should be sent.
  * @return {Promise}         
  */
-utils.sendMessage = function (message, content) {
+utils.sendReply = function (message, content) {
 	return message.reply("```" + content + "```");
+};
+
+utils.sendMessage = function (channel, content) {
+	return channel.sendMessage("```" + content + "```");
+};
+
+utils.getChannel = function (message, channelName) {
+	let guild = message.guild;
+	if (!guild || !guild.available) {return null;}
+
+	let channels = guild.channels;
+	return channels.find( channel => {
+		return channel.name === channelName;
+	});
 };
 
 /**
@@ -19,21 +33,24 @@ utils.sendMessage = function (message, content) {
  * @param  {String} commandType The plugin the commands come from.
  * @return {Promise}             
  */
-utils.printHelp = function (message, commands, commandType = "") {
-	let reply = "HTTP\nHere's a list of " + commandType + " commands:";
+utils.printHelp = function (message, commands, description) {
+	let reply = "HTTP\n";
+	if (description) {
+		reply += description + "\n";
+	}
+	
 	for(let command in commands) {
+		if (commands[command].hidden) {continue;}
 		let description = commands[command].description;
 		let usage = commands[command].usage;
-		if(commands[command].visible) {
-			try {
-				reply += "\n" + command + " " + usage + ": " + description;
-			} catch (e) {
-				console.log("Can't get description for command " + command + ": " + e);
-			}
+		try {
+			reply += "\n" + command + usage + ": " + description;
+		} catch (e) {
+			console.log("Can't get description for command " + command + ": " + e);
 		}
 	}
 
-	return utils.sendMessage(message, reply);
+	return utils.sendReply(message, reply);
 };
 
 /**

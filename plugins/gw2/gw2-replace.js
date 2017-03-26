@@ -19,13 +19,13 @@ let commands = {
 
 			let command = gw2Commands[args[1]];
 			if(!command) {
-				return utils.sendMessage(message, "Sorry, I don't know that command!");
+				return utils.sendReply(message, "Sorry, I don't know that command!");
 			} else {
 				try {
 					return command.run(message, args.slice(1));
 				} catch(e) {
 					console.log(e);
-					return utils.sendMessage(message, "Sorry, command failed!");
+					return utils.sendReply(message, "Sorry, command failed!");
 				}
 			}
 		}
@@ -49,9 +49,9 @@ let gw2Commands = {
 
 			request("https://api.guildwars2.com/v2/commerce/exchange/gems?quantity=" + numGems)
 				.then(res => {
-					return utils.sendMessage(message, numGems + " gems => " + res.quantity);
+					return utils.sendReply(message, numGems + " gems => " + res.quantity);
 				}).catch(err => {
-					return utils.sendMessage(message, "oh nooooes");
+					return utils.sendReply(message, "oh nooooes");
 				});
 		}
 	},
@@ -64,9 +64,9 @@ let gw2Commands = {
 
 			request("https://api.guildwars2.com/v2/commerce/exchange/coins?quantity=" + numGold)
 				.then(res => {
-					return utils.sendMessage(message, numGold + " gems => " + res.quantity);
+					return utils.sendReply(message, numGold + " gems => " + res.quantity);
 				}).catch(err => {
-					return utils.sendMessage(message, "oh nooooes");
+					return utils.sendReply(message, "oh nooooes");
 				});
 		}
 	},
@@ -79,7 +79,7 @@ let gw2Commands = {
 
 			var world = Tools.searchFor(worlds, worldName, "name")[0];
 			if(!world) {
-				Tools.sendMessage(message, "Sorry, I didn't find anything!");
+				Tools.sendReply(message, "Sorry, I didn't find anything!");
 				return;
 			}
 
@@ -118,7 +118,7 @@ let gw2Commands = {
 				result += blueWorld + ": " + (Math.round(greenBL.kills.blue / greenBL.deaths.blue * 100)/100) + "\n";
 				result += greenWorld + ": " + (Math.round(greenBL.kills.green / greenBL.deaths.green * 100)/100) + "\n";
 
-				Tools.sendMessage(message, result);
+				Tools.sendReply(message, result);
 				
 			}
 
@@ -135,7 +135,7 @@ let gw2Commands = {
 
 			var world = Tools.searchFor(worlds, worldName, "name")[0];
 			if(!world) {
-				Tools.sendMessage(message, "Sorry, I didn't find anything!");
+				Tools.sendReply(message, "Sorry, I didn't find anything!");
 				return;
 			}
 
@@ -174,7 +174,7 @@ let gw2Commands = {
 				result += blueWorld + ": " + greenBL.scores.blue + "\n";
 				result += greenWorld + ": " + greenBL.scores.green + "\n";
 
-				Tools.sendMessage(message, result);
+				Tools.sendReply(message, result);
 				
 			}
 

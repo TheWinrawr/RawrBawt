@@ -7,26 +7,16 @@ const
 let commands = {
 	"hi": {
 		usage: "",
-		visible: true,
 		description: "Can be used to check if the bot is alive. If it doesn't respond, the bot is either offline or broken.",
 		run: (message, args) => {
-			return utils.sendMessage(message, "Hi, " + message.author.username + "!");
-		}
-	},
-
-	"help": {
-		usage: "",
-		visible: true,
-		description: "Get a list of commands with descriptions",
-		run: (message, args) => {
-			return utils.printHelp(message, commands);
+			return utils.sendReply(message, "Hi, " + message.author.username + "!");
 		}
 	},
 
 	"todo" :{
 		usage: "",
 		description: "",
-		visible: true,
+		hidden: true,
 		run: (message, args) => {
 			fs.readFile("./todo.txt", "utf8", function (err,data) {
 				if (err) {
@@ -39,22 +29,22 @@ let commands = {
 
 	"change-nickname" :{
 		usage: "",
-		description: "",
+		description: "Changes the nickname of a user.",
 		run: (message, args) => {
 			let username = args[1];
 			let nickname = args.slice(2).join(" ");
 
 			let member = utils.findGuildMember(message, username);
 			if(!member) {
-				return utils.sendMessage(message, "Sorry, I couldn't find that person!");
+				return utils.sendReply(message, "Sorry, I couldn't find that person!");
 			}
 
 			member.setNickname(nickname).then( () => {
 				if (nickname === "") nickname = member.user.username;
-				return utils.sendMessage(message, member.user.username + " shall henceforth be known as " + nickname + "!")
+				return utils.sendReply(message, member.user.username + " shall henceforth be known as " + nickname + "!");
 			}).catch( err => {
 				console.log(err);
-				return utils.sendMessage(message, "Sorry, I can't set the nickname of that person!");
+				return utils.sendReply(message, "Sorry, I can't set the nickname of that person!");
 			});
 		}
 	},
